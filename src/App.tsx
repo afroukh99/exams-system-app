@@ -1,9 +1,12 @@
+import { Outlet } from "react-router-dom"
 
 function App() {
 
   return (
     <div className="">
-      hello world
+      <header>Header</header>
+      <Outlet/>
+      <footer>Footer</footer>
     </div>
   )
 }
