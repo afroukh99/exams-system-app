@@ -12,12 +12,21 @@ import FormField from "@/components/form/FormField";
 import PasswordField from "@/components/form/PasswordField";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import type { SignupFormValues } from "@/types/form.types";
 
 
 const Signup = () => {
 
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
+    const methodes = useForm<SignupFormValues>();
+    const isSubmitting = methodes.formState.isSubmitting;
+
+    const  onSubmit = async(data: SignupFormValues) => {
+    // Logique de soumission du formulaire
+    console.log("Form submitted:", data);
+      await new Promise((resolve) => setTimeout(resolve, 2000)); 
+      methodes.reset();
+    }
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-background">
@@ -30,44 +39,38 @@ const Signup = () => {
         </CardHeader>
         <CardContent>
           {/* Formulaire d'inscription */}
-          <Form>
+          <Form<SignupFormValues> methodes={methodes} onSubmit={onSubmit} id="signup-form">
             <FormField
+              name="firstname"
               id="firstname"
               label="Prénom"
               type="text"
               placeholder="Jean"
-              register={register}
-              error={errors.firstname}
             />
             <FormField
+              name="lastname"
               id="lastname"
               label="Nom"
               type="text"
               placeholder="Dupont"
-              register={register}
-              error={errors.lastname}
             />
             <FormField
+              name="email"
               id="email"
               label="E-mail"
               type="email"
               placeholder="exemple@domaine.com"
-              register={register}
-              error={errors.email}
             />
-            <PasswordField
-              register={register}
-              error={errors.password}
-            />
+            <PasswordField/>
           </Form>
           {/* Formulaire d'inscription */}
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button disabled={isSubmitting} form="form" type="submit" className="w-full">
+          <Button  disabled={isSubmitting} form="signup-form" type="submit" className="w-full">
             S'inscrire
           </Button>
           <Link className="w-full" to={"/login"}>
-            <Button variant="outline" className="w-full">
+            <Button disabled={isSubmitting} variant="outline" className="w-full">
               Se connecter
             </Button>
           </Link>

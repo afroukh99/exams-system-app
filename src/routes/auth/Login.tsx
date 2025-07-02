@@ -38,7 +38,7 @@ const Login = () => {
                 </CardHeader>
                 <CardContent>
                     {/* Formulaire de connexion */}
-                    <Form id="login-form" methodes={methodes}  onSubmit={onSubmit}>
+                    <Form<LoginFormValues> id="login-form" methodes={methodes}  onSubmit={onSubmit}>
                         <FormField name="email" id="email" label="E-mail" type="email" placeholder="exemple@mail.domaine"/>
                         <PasswordField />
                     </Form>

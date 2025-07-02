@@ -1,3 +1,4 @@
+import type { BaseSyntheticEvent } from "react"
 import type React from "react"
 import type {  FieldValues, UseFormReturn } from "react-hook-form"
 
@@ -11,12 +12,12 @@ export type FormFieldProps = {
 }
 
 
-export interface FormProps  {
+export interface FormProps<T extends FieldValues = FieldValues> {
     id : string
     className ?: string
     children ?: React.ReactNode
-    onSubmit: (data: LoginFormValues | SignupFormValues) => Promise<void>
-    methodes : UseFormReturn<LoginFormValues, any, LoginFormValues>
+    onSubmit: (data: T) => Promise<void>
+    methodes : UseFormReturn<T>
 }
 
 
