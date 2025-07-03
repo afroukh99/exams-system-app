@@ -7,26 +7,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Form from "@/components/form/Form";
-import FormField from "@/components/form/FormField";
-import PasswordField from "@/components/form/PasswordField";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import type { SignupFormValues } from "@/types/form.types";
-
+import { signupSchema, type SignupFormValues } from "@/schemas/signup.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
+import InputField from "@/components/InputField";
 
 const Signup = () => {
+  const form = useForm<SignupFormValues>({
+    resolver: zodResolver(signupSchema),
+  });
 
-
-    const methodes = useForm<SignupFormValues>();
-    const isSubmitting = methodes.formState.isSubmitting;
-
-    const  onSubmit = async(data: SignupFormValues) => {
-    // Logique de soumission du formulaire
-    console.log("Form submitted:", data);
-      await new Promise((resolve) => setTimeout(resolve, 2000)); 
-      methodes.reset();
-    }
+  const onSubmit = async (data: SignupFormValues) => {
+    console.log("Form submitted", data);
+    await new Promise((r) => setTimeout(r, 2000));
+    form.reset();
+  };
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-background">
@@ -38,39 +35,47 @@ const Signup = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <Form {...form}>
           {/* Formulaire d'inscription */}
-          <Form<SignupFormValues> methodes={methodes} onSubmit={onSubmit} id="signup-form">
-            <FormField
-              name="firstname"
-              id="firstname"
-              label="Prénom"
-              type="text"
-              placeholder="Jean"
-            />
-            <FormField
-              name="lastname"
-              id="lastname"
-              label="Nom"
-              type="text"
-              placeholder="Dupont"
-            />
-            <FormField
-              name="email"
-              id="email"
-              label="E-mail"
-              type="email"
-              placeholder="exemple@domaine.com"
-            />
-            <PasswordField/>
+            <form id="signup-form" onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+              <InputField
+                control={form.control}
+                name="firstName"
+                label="Prénom"
+                placeholder="ex : Ali"
+                type="text"
+              />
+              <InputField
+                control={form.control}
+                name="lastName"
+                label="Nom"
+                placeholder="ex : Dupont"
+                type="text"
+              />
+              <InputField
+                control={form.control}
+                name="email"
+                label="E-mail"
+                placeholder="exemple@mail.domaine"
+                type="email"
+              />
+              <InputField
+                control={form.control}
+                name="password"
+                label="Mot de passe"
+                placeholder="Votre mot de passe"
+                type="password"
+              />
+              <Button disabled={form.formState.isSubmitting} form="signup-form" type="submit" className="w-full">
+                S'inscrire
+              </Button>
+            </form>
+          {/* Formulaire d'inscription */}
           </Form>
-          {/* Formulaire d'inscription */}
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button  disabled={isSubmitting} form="signup-form" type="submit" className="w-full">
-            S'inscrire
-          </Button>
           <Link className="w-full" to={"/login"}>
-            <Button disabled={isSubmitting} variant="outline" className="w-full">
+            <Button disabled={form.formState.isSubmitting} variant="outline" className="w-full">
               Se connecter
             </Button>
           </Link>

@@ -1,62 +1,87 @@
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
 } from "@/components/ui/card"
-import { useForm } from "react-hook-form"
-import  Form  from "@/components/form/Form";
-import { Link } from "react-router-dom";
-import FormField from "@/components/form/FormField";
-import PasswordField from "@/components/form/PasswordField";
-import type { LoginFormValues } from "@/types/form.types";
+import { Link } from "react-router-dom"
+import { loginSchema, type LoginFormValues } from "@/schemas/login.schema"
+import InputField from "@/components/InputField"
 
 const Login = () => {
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  })
 
-    const methodes = useForm<LoginFormValues>()
+  const onSubmit = async (data: LoginFormValues) => {
+    console.log("Form submitted", data)
+    await new Promise((r) => setTimeout(r, 2000))
+    form.reset()
+  }
 
-    const isSubmitting = methodes.formState.isSubmitting;
+  return (
+    <div className="w-full h-screen flex items-center justify-center bg-background">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Connectez-vous à votre compte</CardTitle>
+          <CardDescription>
+            Entrez votre adresse e-mail ci-dessous pour vous connecter à votre compte
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              id="login-form"
+              className="flex flex-col gap-6"
+            >
+              <InputField
+                control={form.control}
+                name="email"
+                label="E-mail"
+                type="email"
+                placeholder="exemple@mail.domaine"
+              />
 
-    const onSubmit = async(data: LoginFormValues) => {
-        console.log("Form data submitted:", data);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log("Form submission complete");
-        methodes.reset();
-    }
+              <InputField
+                control={form.control}
+                name="password"
+                label="Mot de passe"
+                type="password"
+                placeholder="Votre mot de passe"
+              />
 
-    return (
-        <div className="w-full h-screen flex items-center justify-center bg-background">
-            <Card className="w-full max-w-sm">
-                <CardHeader>
-                    <CardTitle>Connectez-vous à votre compte</CardTitle>
-                    <CardDescription>
-                        Entrez votre adresse e-mail ci-dessous pour vous connecter à votre compte
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {/* Formulaire de connexion */}
-                    <Form<LoginFormValues> id="login-form" methodes={methodes}  onSubmit={onSubmit}>
-                        <FormField name="email" id="email" label="E-mail" type="email" placeholder="exemple@mail.domaine"/>
-                        <PasswordField />
-                    </Form>
-                    {/* Formulaire de connexion */}
-                </CardContent>
-                <CardFooter className="flex-col gap-2">
-                    <Button disabled={isSubmitting}  form="login-form" type="submit" className="w-full">
-                        Se connecter
-                    </Button>
-                    <Link className="w-full" to={"/signup"}>
-                        <Button disabled={isSubmitting} variant="outline" className="w-full">
-                            S'inscrire
-                        </Button>
-                    </Link>
-                </CardFooter>
-            </Card>
-        </div>
-    )
+              <Button disabled={form.formState.isSubmitting} type="submit" className="w-full">
+                Se connecter
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        {/* Footer avec lien inscription hors formulaire */}
+        <CardFooter className="flex-col gap-2 w-full">
+          <Link className="w-full" to={"/signup"}>
+            <Button variant="outline" className="w-full">
+              S'inscrire
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
+    </div>
+  )
 }
 
 export default Login
