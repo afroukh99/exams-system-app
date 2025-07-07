@@ -1,11 +1,15 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './routes/auth/Login.tsx'
+import Login from './routes/auth/Auth.tsx'
 import Signup from './routes/auth/Signup.tsx'
 import ProtectedRoutes from './utils/ProtectedRoutes.tsx'
 import HomePage from './routes/HomePage.tsx'
-import ExamsPage from './routes/ExamsPage.tsx'
+import NotFound from './routes/NotFound.tsx'
+import TeacherDashboard from './routes/TeacherDashboard.tsx'
+import StudentEntry from './routes/StudentEntry.tsx'
+import Exam from './routes/Exam.tsx'
+import Auth from './routes/auth/Auth.tsx'
 
 
 
@@ -19,19 +23,32 @@ const router = createBrowserRouter([
         element : <HomePage/>
       },
       {
-        path : "/exams",
-        element : <ExamsPage/>
+        path : "/teacher",
+        element : <TeacherDashboard/>
       },
+      {
+        path : "exam/:examId",
+        children : [
+          {
+            path : "",
+            element : <StudentEntry/>
+          },
+          {
+            path : ":take",
+            element : <Exam/>
+          }
+        ]
+      }   
     ]
   }
   ,
   {
-    path: "/login",
-    element: <Login />
+    path: "/auth",
+    element : <Auth/>
   },
   {
-    path: "/signup",
-    element: <Signup />
+    path : "*",
+    element : <NotFound/>
   }
 ])
 

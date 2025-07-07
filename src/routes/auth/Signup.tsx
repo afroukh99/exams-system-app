@@ -3,16 +3,16 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signupSchema, type SignupFormValues } from "@/schemas/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import InputField from "@/components/InputField";
+import { Label } from "@radix-ui/react-label";
+import { Lock, Mail, User } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { TabsContent } from "@/components/ui/tabs";
 
 const Signup = () => {
   const form = useForm<SignupFormValues>({
@@ -26,62 +26,68 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Créer un compte</CardTitle>
-          <CardDescription>
-            Remplissez les champs ci-dessous pour créer votre compte
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-          {/* Formulaire d'inscription */}
-            <form id="signup-form" onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-              <InputField
-                control={form.control}
-                name="firstName"
-                label="Prénom"
-                placeholder="ex : Ali"
-                type="text"
-              />
-              <InputField
-                control={form.control}
-                name="lastName"
-                label="Nom"
-                placeholder="ex : Dupont"
-                type="text"
-              />
-              <InputField
-                control={form.control}
-                name="email"
-                label="E-mail"
-                placeholder="exemple@mail.domaine"
-                type="email"
-              />
-              <InputField
-                control={form.control}
-                name="password"
-                label="Mot de passe"
-                placeholder="Votre mot de passe"
-                type="password"
-              />
-              <Button disabled={form.formState.isSubmitting} form="signup-form" type="submit" className="w-full">
-                S'inscrire
-              </Button>
-            </form>
-          {/* Formulaire d'inscription */}
-          </Form>
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Link className="w-full" to={"/login"}>
-            <Button disabled={form.formState.isSubmitting} variant="outline" className="w-full">
-              Se connecter
-            </Button>
-          </Link>
-        </CardFooter>
-      </Card>
-    </div>
+       <TabsContent value="register">
+            <Card>
+              <CardHeader>
+                <CardTitle>Register</CardTitle>
+                <CardDescription>
+                  Create your teacher account to get started
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="register-name">Full Name</Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        id="register-name"
+                        type="text"
+                        placeholder="Your full name"
+                        className="pl-10"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="register-email">Email</Label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        id="register-email"
+                        type="email"
+                        placeholder="teacher@example.com"
+                        className="pl-10"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="register-password">Password</Label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        id="register-password"
+                        type="password"
+                        placeholder="Create a password"
+                        className="pl-10"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                  >
+                    Create Account
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </TabsContent>    
   );
 };
 

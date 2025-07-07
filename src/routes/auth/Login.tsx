@@ -1,87 +1,61 @@
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card"
-import { Link } from "react-router-dom"
-import { loginSchema, type LoginFormValues } from "@/schemas/login.schema"
-import InputField from "@/components/InputField"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { TabsContent } from "@/components/ui/tabs";
+import { Lock, Mail } from "lucide-react";
 
 const Login = () => {
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-  })
+    return (
+        <TabsContent value="login">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Login</CardTitle>
+                    <CardDescription>
+                        Enter your credentials to access your dashboard
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="login-email">Email</Label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                                <Input
+                                    id="login-email"
+                                    type="email"
+                                    placeholder="teacher@example.com"
+                                    className="pl-10"
+                                    required
+                                />
+                            </div>
+                        </div>
 
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log("Form submitted", data)
-    await new Promise((r) => setTimeout(r, 2000))
-    form.reset()
-  }
+                        <div className="space-y-2">
+                            <Label htmlFor="login-password">Password</Label>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                                <Input
+                                    id="login-password"
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    className="pl-10"
+                                    required
+                                />
+                            </div>
+                        </div>
 
-  return (
-    <div className="w-full h-screen flex items-center justify-center bg-background">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Connectez-vous à votre compte</CardTitle>
-          <CardDescription>
-            Entrez votre adresse e-mail ci-dessous pour vous connecter à votre compte
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              id="login-form"
-              className="flex flex-col gap-6"
-            >
-              <InputField
-                control={form.control}
-                name="email"
-                label="E-mail"
-                type="email"
-                placeholder="exemple@mail.domaine"
-              />
-
-              <InputField
-                control={form.control}
-                name="password"
-                label="Mot de passe"
-                type="password"
-                placeholder="Votre mot de passe"
-              />
-
-              <Button disabled={form.formState.isSubmitting} type="submit" className="w-full">
-                Se connecter
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-        {/* Footer avec lien inscription hors formulaire */}
-        <CardFooter className="flex-col gap-2 w-full">
-          <Link className="w-full" to={"/signup"}>
-            <Button variant="outline" className="w-full">
-              S'inscrire
-            </Button>
-          </Link>
-        </CardFooter>
-      </Card>
-    </div>
-  )
+                        <Button
+                            type="submit"
+                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                        >
+                            Login
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
+        </TabsContent>
+    )
 }
 
-export default Login
+export default Login;
