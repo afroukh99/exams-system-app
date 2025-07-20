@@ -1,5 +1,5 @@
 package com.univ.exam.repository;
-import com.univ.exam.model.Teacher;
+import com.univ.exam.model.user.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

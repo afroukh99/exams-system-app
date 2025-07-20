@@ -1,5 +1,6 @@
 package com.univ.exam.model;
 
+import com.univ.exam.model.user.Teacher;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

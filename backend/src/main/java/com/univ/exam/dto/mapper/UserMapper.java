@@ -1,7 +1,7 @@
 package com.univ.exam.dto.mapper;
 
 import com.univ.exam.dto.TeacherDto;
-import com.univ.exam.model.Teacher;
+import com.univ.exam.model.user.Teacher;
 
 public class UserMapper {
     public static Teacher toTeacher (TeacherDto teacherDto) {

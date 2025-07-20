@@ -1,4 +1,5 @@
-package com.univ.exam.model;
+package com.univ.exam.model.user;
+import com.univ.exam.model.Exam;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -6,9 +7,10 @@ import java.util.List;
 
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 @Table(name = "Teachers")
 public class Teacher {

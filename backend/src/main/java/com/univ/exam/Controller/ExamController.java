@@ -3,17 +3,16 @@ package com.univ.exam.Controller;
 import com.univ.exam.model.Exam;
 import com.univ.exam.service.implementation.ExamService;
 import com.univ.exam.exceptions.ExamNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/exam")
 public class ExamController {
-
 
     private final ExamService examService;
 
@@ -21,8 +20,6 @@ public class ExamController {
     public ExamController(ExamService examService) {
         this.examService = examService;
     }
-
-
 
     @GetMapping
     public ResponseEntity<List<Exam>> getAllExams () {

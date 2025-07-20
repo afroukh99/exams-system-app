@@ -1,0 +1,126 @@
+.
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── univ
+│   │   │           └── exam
+│   │   │               ├── Controller
+│   │   │               │   ├── ExamController.java
+│   │   │               │   └── TeacherController.java
+│   │   │               ├── dto
+│   │   │               │   ├── ExamDto.java
+│   │   │               │   ├── mapper
+│   │   │               │   │   └── UserMapper.java
+│   │   │               │   └── TeacherDto.java
+│   │   │               ├── ExamsSystemApplication.java
+│   │   │               ├── exceptions
+│   │   │               │   ├── ExamNotFoundException.java
+│   │   │               │   └── UserAlreadyExisteExeption.java
+│   │   │               ├── model
+│   │   │               │   ├── Exam.java
+│   │   │               │   └── Teacher.java
+│   │   │               ├── repository
+│   │   │               │   ├── ExamRepository.java
+│   │   │               │   └── TeacherRepository.java
+│   │   │               ├── security
+│   │   │               │   ├── controller
+│   │   │               │   │   └── AuthController.java
+│   │   │               │   ├── dto
+│   │   │               │   │   └── UserDto.java
+│   │   │               │   ├── model
+│   │   │               │   │   ├── RoleEnum.java
+│   │   │               │   │   ├── Role.java
+│   │   │               │   │   └── User.java
+│   │   │               │   ├── repository
+│   │   │               │   │   ├── RoleRepository.java
+│   │   │               │   │   └── UserRepository.java
+│   │   │               │   ├── SecurityConfig.java
+│   │   │               │   └── service
+│   │   │               │       ├── UserServiceImpl.java
+│   │   │               │       └── UserService.java
+│   │   │               ├── service
+│   │   │               │   ├── IExamService.java
+│   │   │               │   ├── implementation
+│   │   │               │   │   ├── ExamService.java
+│   │   │               │   │   └── TeacherService.java
+│   │   │               │   └── ITeacherService.java
+│   │   │               └── validation
+│   │   │                   └── Validator.java
+│   │   └── resources
+│   │       ├── application.properties
+│   │       ├── static
+│   │       └── templates
+│   └── test
+│       └── java
+│           └── com
+│               └── univ
+│                   └── exam
+│                       └── ExamsSystemApplicationTests.java
+├── target
+│   ├── classes
+│   │   ├── application.properties
+│   │   └── com
+│   │       └── univ
+│   │           └── exam
+│   │               ├── Controller
+│   │               │   ├── ExamController.class
+│   │               │   └── TeacherController.class
+│   │               ├── dto
+│   │               │   ├── ExamDto.class
+│   │               │   ├── mapper
+│   │               │   │   └── UserMapper.class
+│   │               │   └── TeacherDto.class
+│   │               ├── ExamsSystemApplication.class
+│   │               ├── exceptions
+│   │               │   ├── ExamNotFoundException.class
+│   │               │   └── UserAlreadyExisteExeption.class
+│   │               ├── model
+│   │               │   ├── Exam.class
+│   │               │   ├── Teacher$TeacherBuilder.class
+│   │               │   └── Teacher.class
+│   │               ├── repository
+│   │               │   ├── ExamRepository.class
+│   │               │   └── TeacherRepository.class
+│   │               ├── security
+│   │               │   ├── controller
+│   │               │   │   └── AuthController.class
+│   │               │   ├── dto
+│   │               │   │   └── UserDto.class
+│   │               │   ├── model
+│   │               │   │   ├── Role.class
+│   │               │   │   ├── RoleEnum.class
+│   │               │   │   ├── User$UserBuilder.class
+│   │               │   │   └── User.class
+│   │               │   ├── repository
+│   │               │   │   ├── RoleRepository.class
+│   │               │   │   └── UserRepository.class
+│   │               │   ├── SecurityConfig.class
+│   │               │   └── service
+│   │               │       ├── UserService.class
+│   │               │       └── UserServiceImpl.class
+│   │               ├── service
+│   │               │   ├── IExamService.class
+│   │               │   ├── implementation
+│   │               │   │   ├── ExamService.class
+│   │               │   │   └── TeacherService.class
+│   │               │   └── ITeacherService.class
+│   │               └── validation
+│   │                   └── Validator.class
+│   ├── generated-sources
+│   │   └── annotations
+│   ├── generated-test-sources
+│   │   └── test-annotations
+│   └── test-classes
+│       └── com
+│           └── univ
+│               └── exam
+│                   └── ExamsSystemApplicationTests.class
+└── uml
+    ├── class-examv2.drawio
+    └── use-case-exam-v2.1.drawio
+
+59 directories, 65 files
