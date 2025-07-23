@@ -1,50 +1,51 @@
 package com.univ.exam.service.implementation;
 import com.univ.exam.exceptions.UserAlreadyExisteExeption;
-import com.univ.exam.model.user.Role;
-import com.univ.exam.model.user.User;
+import com.univ.exam.model.Role;
+import com.univ.exam.model.User;
 import com.univ.exam.repository.RoleRepository;
 import com.univ.exam.repository.UserRepository;
-import com.univ.exam.service.UserService;
+import com.univ.exam.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+@Transactional
+public class UserServiceImpl implements IUserService {
 
     UserRepository userRepository;
     RoleRepository roleRepository;
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public User addNewUser(String firstName, String lastName, String email, String password, String confirmPassword) {
-        boolean userExist = userRepository.findByEmail(email) != null ;
-        if (userExist) throw new UserAlreadyExisteExeption();
-        if (!password.equals(confirmPassword)) throw new RuntimeException("Password mismatch!");
-        String hashedPassword = bCryptPasswordEncoder.encode(password);
-        User user = User.builder()
-                .userID()
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
-                .password(hashedPassword)
-                .build();
-        return userRepository.save(user);
-    }
 
     @Override
     public Role addNewRole(Role role) {
-       return roleRepository.save(role);
+        return roleRepository.save(role);
     }
 
     @Override
-    public String addRoleToUser(String userID, Role role) {
-        return "";
+    public void addRoleToUser(String userID, Role role) {
+        User user = userRepository.findById(userID)
+                .orElseThrow(() -> new RuntimeException("User doesn't exists !"));
+        Role userRole = roleRepository.findById(role.getId())
+                .orElseThrow(()-> new RuntimeException("Role doesn't exists !"));
+
+        if (!user.getRoles().contains(userRole)) {
+            user.getRoles().add(userRole);
+        }
     }
 
     @Override
-    public String removeRoleFromUser(String userID, Role role) {
-        return "";
+    public void removeRoleFromUser(String userID, Role role) {
+
+    }
+
+    @Override
+    public List<User> fetchAllUsers() {
+        return List.of();
     }
 }

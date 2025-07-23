@@ -1,5 +1,4 @@
-package com.univ.exam.model.user;
-import com.univ.exam.model.Exam;
+package com.univ.exam.model;
 import jakarta.persistence.*;
 import lombok.*;
 

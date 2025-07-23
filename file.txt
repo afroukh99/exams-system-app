@@ -8,46 +8,43 @@
 │   │   │   └── com
 │   │   │       └── univ
 │   │   │           └── exam
+│   │   │               ├── config
+│   │   │               │   └── SecurityConfig.java
 │   │   │               ├── Controller
+│   │   │               │   ├── AuthController.java
 │   │   │               │   ├── ExamController.java
 │   │   │               │   └── TeacherController.java
 │   │   │               ├── dto
 │   │   │               │   ├── ExamDto.java
 │   │   │               │   ├── mapper
 │   │   │               │   │   └── UserMapper.java
-│   │   │               │   └── TeacherDto.java
+│   │   │               │   ├── TeacherDto.java
+│   │   │               │   └── UserDto.java
 │   │   │               ├── ExamsSystemApplication.java
 │   │   │               ├── exceptions
 │   │   │               │   ├── ExamNotFoundException.java
 │   │   │               │   └── UserAlreadyExisteExeption.java
 │   │   │               ├── model
 │   │   │               │   ├── Exam.java
-│   │   │               │   └── Teacher.java
+│   │   │               │   └── user
+│   │   │               │       ├── RoleEnum.java
+│   │   │               │       ├── Role.java
+│   │   │               │       ├── Teacher.java
+│   │   │               │       └── User.java
 │   │   │               ├── repository
 │   │   │               │   ├── ExamRepository.java
-│   │   │               │   └── TeacherRepository.java
+│   │   │               │   ├── RoleRepository.java
+│   │   │               │   ├── TeacherRepository.java
+│   │   │               │   └── UserRepository.java
 │   │   │               ├── security
-│   │   │               │   ├── controller
-│   │   │               │   │   └── AuthController.java
-│   │   │               │   ├── dto
-│   │   │               │   │   └── UserDto.java
-│   │   │               │   ├── model
-│   │   │               │   │   ├── RoleEnum.java
-│   │   │               │   │   ├── Role.java
-│   │   │               │   │   └── User.java
-│   │   │               │   ├── repository
-│   │   │               │   │   ├── RoleRepository.java
-│   │   │               │   │   └── UserRepository.java
-│   │   │               │   ├── SecurityConfig.java
-│   │   │               │   └── service
-│   │   │               │       ├── UserServiceImpl.java
-│   │   │               │       └── UserService.java
 │   │   │               ├── service
 │   │   │               │   ├── IExamService.java
 │   │   │               │   ├── implementation
 │   │   │               │   │   ├── ExamService.java
-│   │   │               │   │   └── TeacherService.java
-│   │   │               │   └── ITeacherService.java
+│   │   │               │   │   ├── TeacherService.java
+│   │   │               │   │   └── UserServiceImpl.java
+│   │   │               │   ├── ITeacherService.java
+│   │   │               │   └── UserService.java
 │   │   │               └── validation
 │   │   │                   └── Validator.java
 │   │   └── resources
@@ -66,48 +63,44 @@
 │   │   └── com
 │   │       └── univ
 │   │           └── exam
+│   │               ├── config
+│   │               │   └── SecurityConfig.class
 │   │               ├── Controller
+│   │               │   ├── AuthController.class
 │   │               │   ├── ExamController.class
 │   │               │   └── TeacherController.class
 │   │               ├── dto
 │   │               │   ├── ExamDto.class
 │   │               │   ├── mapper
 │   │               │   │   └── UserMapper.class
-│   │               │   └── TeacherDto.class
+│   │               │   ├── TeacherDto.class
+│   │               │   └── UserDto.class
 │   │               ├── ExamsSystemApplication.class
 │   │               ├── exceptions
 │   │               │   ├── ExamNotFoundException.class
 │   │               │   └── UserAlreadyExisteExeption.class
 │   │               ├── model
 │   │               │   ├── Exam.class
-│   │               │   ├── Teacher$TeacherBuilder.class
-│   │               │   └── Teacher.class
+│   │               │   └── user
+│   │               │       ├── Role.class
+│   │               │       ├── RoleEnum.class
+│   │               │       ├── Teacher$TeacherBuilder.class
+│   │               │       ├── Teacher.class
+│   │               │       ├── User$UserBuilder.class
+│   │               │       └── User.class
 │   │               ├── repository
 │   │               │   ├── ExamRepository.class
-│   │               │   └── TeacherRepository.class
-│   │               ├── security
-│   │               │   ├── controller
-│   │               │   │   └── AuthController.class
-│   │               │   ├── dto
-│   │               │   │   └── UserDto.class
-│   │               │   ├── model
-│   │               │   │   ├── Role.class
-│   │               │   │   ├── RoleEnum.class
-│   │               │   │   ├── User$UserBuilder.class
-│   │               │   │   └── User.class
-│   │               │   ├── repository
-│   │               │   │   ├── RoleRepository.class
-│   │               │   │   └── UserRepository.class
-│   │               │   ├── SecurityConfig.class
-│   │               │   └── service
-│   │               │       ├── UserService.class
-│   │               │       └── UserServiceImpl.class
+│   │               │   ├── RoleRepository.class
+│   │               │   ├── TeacherRepository.class
+│   │               │   └── UserRepository.class
 │   │               ├── service
 │   │               │   ├── IExamService.class
 │   │               │   ├── implementation
 │   │               │   │   ├── ExamService.class
-│   │               │   │   └── TeacherService.class
-│   │               │   └── ITeacherService.class
+│   │               │   │   ├── TeacherService.class
+│   │               │   │   └── UserServiceImpl.class
+│   │               │   ├── ITeacherService.class
+│   │               │   └── UserService.class
 │   │               └── validation
 │   │                   └── Validator.class
 │   ├── generated-sources
@@ -123,4 +116,4 @@
     ├── class-examv2.drawio
     └── use-case-exam-v2.1.drawio
 
-59 directories, 65 files
+52 directories, 65 files

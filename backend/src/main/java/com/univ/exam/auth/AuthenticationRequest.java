@@ -1,4 +1,4 @@
-package com.univ.exam.dto;
+package com.univ.exam.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class UserDto {
+public class AuthenticationRequest {
     private String firstName;
     private String lastName;
     private String email;

@@ -1,7 +1,7 @@
 package com.univ.exam.Controller;
 import com.univ.exam.dto.TeacherDto;
 import com.univ.exam.model.Exam;
-import com.univ.exam.model.user.Teacher;
+import com.univ.exam.model.Teacher;
 import com.univ.exam.service.ITeacherService;
 import com.univ.exam.dto.ExamDto;
 import org.springframework.http.ResponseEntity;

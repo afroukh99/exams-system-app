@@ -1,11 +1,9 @@
-package com.univ.exam.model.user;
-
+package com.univ.exam.model;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -13,11 +11,12 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 
     @Id
-    @Column(nullable = false, unique = true , updatable = false)
-    private String userID;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String userId;
 
     @Column(nullable = false)
     private String firstName;
@@ -40,8 +39,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList();
 
+    /*
     // --- Builder Pattern ---
     public static UserBuilder builder() {
         return new UserBuilder();
@@ -90,4 +90,5 @@ public class User {
             return user;
         }
     }
+         */
 }

@@ -3,7 +3,7 @@ package com.univ.exam.service.implementation;
 import com.univ.exam.dto.TeacherDto;
 import com.univ.exam.dto.mapper.UserMapper;
 import com.univ.exam.model.Exam;
-    import com.univ.exam.model.user.Teacher;
+    import com.univ.exam.model.Teacher;
     import com.univ.exam.repository.TeacherRepository;
     import com.univ.exam.service.IExamService;
     import com.univ.exam.service.ITeacherService;

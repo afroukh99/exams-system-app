@@ -1,4 +1,4 @@
-package com.univ.exam.model.user;
+package com.univ.exam.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,5 +15,5 @@ public class Role {
     private Long id;
 
     @Column()
-    private RoleEnum role;
+    private String role;
 }
