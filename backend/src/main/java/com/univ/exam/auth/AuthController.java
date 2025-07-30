@@ -13,9 +13,14 @@ public class AuthController {
     private final IAuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser (@RequestBody AuthenticationRequest authReq) {
-        User user = authService.register(authReq);
+    public ResponseEntity<User> createUser (@RequestBody RegistrationRequest registerReq) {
+        User user = authService.register(registerReq.getFirstName()  , registerReq.getLastName(), registerReq.getEmail() , registerReq.getPassword(),registerReq.getConfirmPassword());
         return ResponseEntity.status(201).body(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthReq> authenticate (@RequestBody AuthReq authReq) {
+        return ResponseEntity.status(200).body(authReq);
     }
 
 

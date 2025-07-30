@@ -8,7 +8,7 @@ import com.univ.exam.dto.ExamDto;
 
 public interface ITeacherService {
 
-    Exam createExam(ExamDto examDto) throws Exception;
+    Exam createExam(String name , String description , Long teacherId) throws Exception;
 
     Teacher register(TeacherDto teacherDto);
 

@@ -16,22 +16,20 @@ public class AuthService implements IAuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     public void validateRegistration (String email , String password , String confirmPassword) {
         boolean userExist = userRepository.findByEmail(email) != null;
         if (userExist) throw new UserAlreadyExisteExeption();
         if (!password.equals(confirmPassword)) throw new RuntimeException("Password mismatch!");
     }
 
-
     @Override
-    public User register(AuthenticationRequest authReq) {
-        validateRegistration(authReq.getEmail() , authReq.getPassword() , authReq.getConfirmPassword());
-        String hashedPassword = bCryptPasswordEncoder.encode(authReq.getPassword());
+    public User register(String firstName ,String lastName , String email ,String password ,String confirmPassword ) {
+        validateRegistration(email , password , confirmPassword);
+        String hashedPassword = bCryptPasswordEncoder.encode(password);
         User user = User.builder()
-                .firstName(authReq.getFirstName())
-                .lastName(authReq.getLastName())
-                .email(authReq.getEmail())
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
                 .password(hashedPassword)
                 .build();
         return userRepository.save(user);
@@ -44,6 +42,5 @@ public class AuthService implements IAuthService {
 
     @Override
     public void logout() {
-
     }
 }

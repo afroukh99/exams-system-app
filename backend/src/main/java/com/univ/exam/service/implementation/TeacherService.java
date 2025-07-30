@@ -32,18 +32,16 @@ import java.util.UUID;
             this.examService = examService;
         }
 
-
         @Override
-        public Exam createExam(ExamDto examDto) throws Exception {
-            Validator.validateExam(examDto);
-            Teacher teacher = this.getTeacherById(examDto.getTeacherId());
-
-            Exam exam = new Exam();
-            exam.setName(examDto.getName());
-            exam.setDescription(examDto.getDescription());
-            exam.setTeacher(teacher);
-            exam.setLink(UUID.randomUUID());
-
+        public Exam createExam(String name , String description , Long teacherId) throws Exception {
+            Validator.validateExam(name , description , teacherId);
+            Teacher teacher = this.getTeacherById(teacherId);
+            Exam exam = Exam.builder()
+                    .name(name)
+                    .description(description)
+                    .teacher(teacher)
+                    .link(UUID.randomUUID())
+                    .build();
             return  examService.saveExam(exam);
         }
 

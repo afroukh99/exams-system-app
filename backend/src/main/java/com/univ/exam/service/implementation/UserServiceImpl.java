@@ -1,12 +1,10 @@
 package com.univ.exam.service.implementation;
-import com.univ.exam.exceptions.UserAlreadyExisteExeption;
 import com.univ.exam.model.Role;
 import com.univ.exam.model.User;
 import com.univ.exam.repository.RoleRepository;
 import com.univ.exam.repository.UserRepository;
 import com.univ.exam.service.IUserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -28,10 +26,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void addRoleToUser(String userID, Role role) {
-        User user = userRepository.findById(userID)
+    public void addRoleToUser(String username , String role) {
+        User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("User doesn't exists !"));
-        Role userRole = roleRepository.findById(role.getId())
+        Role userRole = roleRepository.findByRole(role)
                 .orElseThrow(()-> new RuntimeException("Role doesn't exists !"));
 
         if (!user.getRoles().contains(userRole)) {
@@ -46,6 +44,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> fetchAllUsers() {
-        return List.of();
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User loadUserByEmail(String email) {
+        return null;
     }
 }

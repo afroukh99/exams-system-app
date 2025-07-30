@@ -5,20 +5,17 @@ import com.univ.exam.dto.TeacherDto;
 
 public class Validator {
 
-    public static void validateExam(ExamDto examDto) {
-        if (examDto == null) {
-            throw new IllegalArgumentException("Exam data cannot be null");
-        }
+    public static void validateExam(String name , String description , Long teacherId) {
 
-        if (examDto.getName() == null || examDto.getName().isBlank()) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Exam name is required");
         }
 
-        if (examDto.getTeacherId() == null) {
+        if (teacherId == null) {
             throw new IllegalArgumentException("Teacher ID is required");
         }
 
-        if (examDto.getDescription() != null) {
+        if (description != null) {
             throw new IllegalArgumentException("Description is too long (max 500 characters)");
         }
     }

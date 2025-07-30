@@ -1,8 +1,14 @@
 package com.univ.exam.model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -12,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,9 +34,11 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String confirmPassword;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -41,54 +49,15 @@ public class User {
     )
     private List<Role> roles = new ArrayList();
 
-    /*
-    // --- Builder Pattern ---
-    public static UserBuilder builder() {
-        return new UserBuilder();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+                .toList();
     }
 
-    public static class UserBuilder {
-        private final User user = new User();
-
-        public UserBuilder userID() {
-            String id = UUID.randomUUID().toString();
-            user.setUserID(id);
-            return this;
-        }
-
-        public UserBuilder firstName(String firstName) {
-            user.setFirstName(firstName);
-            return this;
-        }
-
-        public UserBuilder lastName(String lastName) {
-            user.setLastName(lastName);
-            return this;
-        }
-
-        public UserBuilder email(String email) {
-            user.setEmail(email);
-            return this;
-        }
-
-        public UserBuilder password(String password) {
-            user.setPassword(password);
-            return this;
-        }
-
-        public UserBuilder roles(List<Role> roles) {
-            user.setRoles(roles);
-            return this;
-        }
-
-        public UserBuilder addRole(Role role) {
-            user.getRoles().add(role);
-            return this;
-        }
-
-        public User build() {
-            return user;
-        }
+    @Override
+    public String getUsername() {
+        return email;
     }
-         */
 }
