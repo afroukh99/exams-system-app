@@ -1,4 +1,4 @@
-package com.univ.exam.model;
+package com.univ.exam.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -18,11 +19,11 @@ import java.util.UUID;
 public class Exam  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long examID;
 
     @Column(nullable = false)
-    private String name;
+    private String title;
 
     @Column(nullable = true)
     private String description;
@@ -30,10 +31,19 @@ public class Exam  {
     @Column(length = 36, nullable = false , updatable = false)
     private UUID link;
 
-
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "exam" , cascade = CascadeType.ALL , orphanRemoval = true)
+    List<Question> questions;
+
+    @OneToMany(mappedBy = "exam" , cascade = CascadeType.ALL , orphanRemoval = true)
+    List<Note> notes;
+
+    @PrePersist
+    public void setUUID () {
+        if (link == null) UUID.randomUUID();
+    }
 
 }

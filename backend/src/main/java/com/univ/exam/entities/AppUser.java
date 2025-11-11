@@ -1,8 +1,7 @@
-package com.univ.exam.model;
+package com.univ.exam.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User implements UserDetails {
+@Table(name = "users")
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -54,6 +54,11 @@ public class User implements UserDetails {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
                 .toList();
+    }
+
+    @Override
+    public String getPassword() {
+        return "";
     }
 
     @Override

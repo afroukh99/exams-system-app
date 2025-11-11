@@ -1,4 +1,4 @@
-package com.univ.exam.model;
+package com.univ.exam.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,8 +8,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @Table(name = "Teachers")
 public class Teacher {

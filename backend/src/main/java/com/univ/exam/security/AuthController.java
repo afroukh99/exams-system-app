@@ -1,5 +1,5 @@
 package com.univ.exam.auth;
-import com.univ.exam.model.User;
+import com.univ.exam.model.AppUser;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,16 +13,8 @@ public class AuthController {
     private final IAuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser (@RequestBody RegistrationRequest registerReq) {
-        User user = authService.register(registerReq.getFirstName()  , registerReq.getLastName(), registerReq.getEmail() , registerReq.getPassword(),registerReq.getConfirmPassword());
+    public ResponseEntity<AppUser> createUser (@RequestBody RegistrationRequest registerReq) {
+        AppUser user = authService.register(registerReq.getFirstName()  , registerReq.getLastName(), registerReq.getEmail() , registerReq.getPassword(),registerReq.getConfirmPassword());
         return ResponseEntity.status(201).body(user);
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<AuthReq> authenticate (@RequestBody AuthReq authReq) {
-        return ResponseEntity.status(200).body(authReq);
-    }
-
-
-
 }
