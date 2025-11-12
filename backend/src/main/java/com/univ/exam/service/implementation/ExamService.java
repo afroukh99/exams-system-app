@@ -1,6 +1,6 @@
 package com.univ.exam.service.implementation;
 
-import com.univ.exam.model.Exam;
+import com.univ.exam.entities.Exam;
 import com.univ.exam.repository.ExamRepository;
 import com.univ.exam.service.IExamService;
 import com.univ.exam.exceptions.ExamNotFoundException;

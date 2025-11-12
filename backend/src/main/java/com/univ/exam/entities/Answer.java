@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Builder
+@Table(name = "answers")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +21,9 @@ public class Answer {
     private String value;
 
     @Column
-    private boolean isCorrect;
+    private boolean correct;
 
+    @ManyToOne
+    @JoinColumn(name = "question_id" , nullable = false)
+    private Question question;
 }

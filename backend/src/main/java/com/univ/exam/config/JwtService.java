@@ -48,14 +48,13 @@ public class JwtService {
         return extractClaim(token , Claims::getSubject);
     }
 
-    public Claims extractAllClaims (String token) {
+    private Claims extractAllClaims (String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJwt(token)
                 .getBody();
-
     }
 
     private Key getSignKey() {

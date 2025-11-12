@@ -32,8 +32,8 @@ public class Exam  {
     private UUID link;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(mappedBy = "exam" , cascade = CascadeType.ALL , orphanRemoval = true)
     List<Question> questions;
@@ -43,7 +43,7 @@ public class Exam  {
 
     @PrePersist
     public void setUUID () {
-        if (link == null) UUID.randomUUID();
+        if (link == null) link = UUID.randomUUID();
     }
 
 }

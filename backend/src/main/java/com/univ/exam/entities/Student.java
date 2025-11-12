@@ -12,12 +12,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Builder
+@Table(name = "students")
 public class Student {
 
     @Id
     private String username;
 
-    @Column
+    @Column(unique = true , nullable = false)
     private String email;
 
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL , orphanRemoval = true)

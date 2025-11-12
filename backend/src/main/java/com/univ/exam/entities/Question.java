@@ -8,10 +8,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Builder
+@Table(name = "questions")
 public class Question {
 
     @Id
@@ -29,5 +32,12 @@ public class Question {
 
     @Column
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_id" , nullable = false)
+    private  Exam exam;
+
+    @OneToMany(mappedBy = "question" , cascade = CascadeType.ALL , orphanRemoval = true)
+    List<Answer> answers;
 
 }
