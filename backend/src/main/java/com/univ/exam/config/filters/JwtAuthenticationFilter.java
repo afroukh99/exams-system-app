@@ -22,7 +22,9 @@ class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal
-            (@NonNull HttpServletRequest request,@NonNull HttpServletResponse response,@NonNull FilterChain filterChain)
+            (@NonNull HttpServletRequest request,
+             @NonNull HttpServletResponse response,
+             @NonNull FilterChain filterChain)
             throws ServletException, IOException
     {
         final String autHeader = request.getHeader("authorization");
@@ -35,5 +37,6 @@ class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         token = autHeader.substring(7);
         username = jwtService.extractUsername(token);
+
     }
 }
