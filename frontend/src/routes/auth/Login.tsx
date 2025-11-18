@@ -1,87 +1,59 @@
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card"
-import { Link } from "react-router-dom"
-import { loginSchema, type LoginFormValues } from "@/schemas/login.schema"
-import InputField from "@/components/InputField"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import Google from "@/components/ui/icons/Google";
+import { Mail, Lock } from "lucide-react"
+
 
 const Login = () => {
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-  })
-
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log("Form submitted", data)
-    await new Promise((r) => setTimeout(r, 2000))
-    form.reset()
-  }
-
-  return (
-    <div className="w-full h-screen flex items-center justify-center bg-background">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Connectez-vous à votre compte</CardTitle>
-          <CardDescription>
-            Entrez votre adresse e-mail ci-dessous pour vous connecter à votre compte
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              id="login-form"
-              className="flex flex-col gap-6"
-            >
-              <InputField
-                control={form.control}
-                name="email"
-                label="E-mail"
-                type="email"
-                placeholder="exemple@mail.domaine"
-              />
-
-              <InputField
-                control={form.control}
-                name="password"
-                label="Mot de passe"
-                type="password"
-                placeholder="Votre mot de passe"
-              />
-
-              <Button disabled={form.formState.isSubmitting} type="submit" className="w-full">
-                Se connecter
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-        {/* Footer avec lien inscription hors formulaire */}
-        <CardFooter className="flex-col gap-2 w-full">
-          <Link className="w-full" to={"/signup"}>
-            <Button variant="outline" className="w-full">
-              S'inscrire
-            </Button>
-          </Link>
-        </CardFooter>
-      </Card>
-    </div>
-  )
+    return (
+        <div className="w-screen min-h-screen flex justify-center items-center bg-[#F8FAFC] p-8">
+            <Card className="w-[500px] p-4">
+                <CardHeader className="font-IBM">
+                    <CardTitle className="text-center text-foreground text-2xl sm:text-3xl">
+                        Welcome to
+                        <span className="text-primary!"> E-QUIZ</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="font-inter">
+                    <form>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex items-center gap-3 bg-[#F1F5F9] p-2 rounded-sm">
+                                <Mail size={20} />
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="m@example.com"
+                                    required
+                                    className="flex-1"
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <div className="flex items-center gap-3 bg-[#F1F5F9] p-2 rounded-sm">
+                                    <Lock size={20}/>
+                                    <input className="flex-1" id="password" type="password" required placeholder="your password" />
+                                </div>
+                                <a href="" className="ml-auto text-xs text-secondary font-bold underline">Forgot password ?</a>
+                            </div>
+                        </div>
+                    </form>
+                </CardContent>
+                <CardFooter className="flex-col gap-2">
+                    <Button type="submit" className="w-32 mr-auto">
+                        Login
+                    </Button>
+                    <div className="flex items-center w-full">
+                        <hr className="grow border-t border-gray-300 mr-2" />
+                        <span className="text-sm text-foreground">OR</span>
+                        <hr className="grow border-t border-gray-300 ml-2" />
+                    </div>
+                    <Button variant="outline" className="w-full">
+                        <Google h={100} w={100}/>
+                        Login with Google
+                    </Button>
+                </CardFooter>
+            </Card>
+        </div>
+    );
 }
 
-export default Login
+export default Login;
